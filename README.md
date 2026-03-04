@@ -21,4 +21,4 @@ npm run start
 npm run build
 ```
 
-The output is written to `dist/index.html`.
+The output is written to `dist/`.
