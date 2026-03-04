@@ -1,6 +1,4 @@
-import { version } from "../../builder/openStoreScript";
-
-const openStore = version();
+import openStore from "../../builder/openStoreScript";
 
 export default function CompletionModal({ isOpen, totalFreed }) {
   if (!isOpen) {

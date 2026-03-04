@@ -114,7 +114,7 @@ body {
   filter: drop-shadow(0 6px 12px rgba(3, 8, 20, 0.35));
 }
 
-body.scan-complete .action--folder:not(.action--cleared) .action__icon {
+.playable--complete .action--folder:not(.action--cleared) .action__icon {
   animation: iconPulse 1.2s ease-in-out infinite;
 }
 
@@ -175,7 +175,7 @@ body.scan-complete .action--folder:not(.action--cleared) .action__icon {
   color: rgba(248, 250, 252, 0.85);
 }
 
-body.scan-complete .action__count:not(.action__count--success) {
+.playable--complete .action__count:not(.action__count--success) {
   color: #ff4d4f;
   text-shadow: 0 0 6px rgba(255, 77, 79, 0.55);
   animation: countPulse 1s ease-in-out infinite;
@@ -217,22 +217,22 @@ body.scan-complete .action__count:not(.action__count--success) {
   text-transform: uppercase;
 }
 
-body.scan-complete .action--folder .action__meta .action__hint {
+.playable--complete .action--folder .action__meta .action__hint {
   opacity: 0;
   visibility: hidden;
 }
 
-body.scan-complete .action--folder .action__meta .action__result {
+.playable--complete .action--folder .action__meta .action__result {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
 }
-body.scan-complete .action--folder .btn {
+.playable--complete .action--folder .btn {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
 }
-body.scan-complete .action--folder .btn:hover {
+.playable--complete .action--folder .btn:hover {
   background: #5209d4;
 }
 
@@ -403,7 +403,7 @@ body.scan-complete .action--folder .btn:hover {
   position: relative;
 }
 
-body.scanning .action--scan::after {
+.playable--scanning .action--scan::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -425,7 +425,7 @@ body.scanning .action--scan::after {
   z-index: 5;
 }
 
-body.scanning .action--scan .loader {
+.playable--scanning .action--scan .loader {
   display: flex;
 }
 
