@@ -146,6 +146,22 @@ body {
   color: rgba(248, 250, 252, 0.7);
 }
 
+.action--folder .action__hint {
+  animation: hintPulse 2s ease-in-out infinite;
+}
+
+@keyframes hintPulse {
+  0%,
+  100% {
+    opacity: 0.9;
+    text-shadow: 0 0 8px rgba(255, 77, 79, 0.4);
+  }
+  50% {
+    opacity: 1;
+    text-shadow: 0 0 20px rgba(255, 77, 79, 0.9);
+  }
+}
+
 .action__meta {
   position: relative;
   min-height: 16px;
@@ -220,6 +236,7 @@ body {
 .playable--complete .action--folder .action__meta .action__hint {
   opacity: 0;
   visibility: hidden;
+  animation: none;
 }
 
 .playable--complete .action--folder .action__meta .action__result {
@@ -585,5 +602,56 @@ body {
 
   .action--scan {
     grid-column: 1 / -1;
+  }
+}
+
+/* Компактні фолдери для низького лендскейпу (наприклад 505×305) */
+@media (orientation: landscape) and (max-height: 360px) {
+  .playable {
+    padding: 8px 16px;
+  }
+
+  .playable__content {
+    gap: 10px;
+  }
+
+  .actions {
+    gap: 8px;
+  }
+
+  .action {
+    padding: 10px 12px;
+    border-radius: 14px;
+  }
+
+  .action--folder {
+    padding: 8px 12px;
+  }
+
+  .action__icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .action__label {
+    font-size: 14px;
+  }
+
+  .action__hint,
+  .action__count {
+    font-size: 11px;
+  }
+
+  .action__meta {
+    min-height: 20px;
+  }
+
+  .playable--complete .action--folder .btn {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+
+  .pointer {
+    width: 56px;
   }
 }
