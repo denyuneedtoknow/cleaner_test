@@ -331,6 +331,77 @@ body {
   backdrop-filter: blur(6px);
 }
 
+.modal-overlay .pyro {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.modal-overlay .pyro__burst {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  box-shadow: var(--fireworks-start);
+  animation:
+    pyroBang 1s ease-out infinite backwards,
+    pyroGravity 1s ease-in infinite backwards,
+    pyroPosition 5s linear infinite backwards;
+}
+
+.modal-overlay .pyro__burst--after {
+  animation-delay: 1.25s, 1.25s, 1.25s;
+  animation-duration: 1.25s, 1.25s, 6.25s;
+}
+
+@keyframes pyroBang {
+  to {
+    box-shadow: var(--fireworks-end);
+  }
+}
+
+@keyframes pyroGravity {
+  to {
+    transform: translateY(200px);
+    opacity: 0;
+  }
+}
+
+@keyframes pyroPosition {
+  0%,
+  19.9% {
+    margin-top: 10%;
+    margin-left: 40%;
+  }
+  20%,
+  39.9% {
+    margin-top: 40%;
+    margin-left: 30%;
+  }
+  40%,
+  59.9% {
+    margin-top: 20%;
+    margin-left: 70%;
+  }
+  60%,
+  79.9% {
+    margin-top: 30%;
+    margin-left: 20%;
+  }
+  80%,
+  100% {
+    margin-top: 30%;
+    margin-left: 80%;
+  }
+}
+
+.modal-overlay .modal {
+  position: relative;
+  z-index: 1;
+}
+
 .modal {
   width: min(360px, 100%);
   background: linear-gradient(180deg, #121b38 0%, #0f1833 100%);
