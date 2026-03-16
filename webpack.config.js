@@ -1,6 +1,8 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const HtmlInlineScriptWebpackPlugin = require("html-inline-script-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
+const webpack = require("webpack");
 
 module.exports = (env, argv) => {
   const isProd = argv.mode === "production";
@@ -43,10 +45,17 @@ module.exports = (env, argv) => {
           ? `${projectName}_${buildVersion}.html`
           : "index.html",
       }),
+      new webpack.DefinePlugin({
+        language: JSON.stringify(process.env.LANGUAGE || "en"),
+        buildVersion: JSON.stringify(buildVersion),
+      }),
       ...(isProd
         ? [new HtmlInlineScriptWebpackPlugin({ scriptMatchPattern: [/bundle\.js$/] })]
         : []),
     ],
+    optimization: isProd
+      ? { minimizer: [new TerserPlugin({ extractComments: false })] }
+      : undefined,
     devtool: isProd ? false : "source-map",
     devServer: {
       static: path.resolve(__dirname, "public"),

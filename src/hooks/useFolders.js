@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
-const CATEGORIES = ["Spam", "Promotions", "Newsletters"];
+const DEFAULT_CATEGORIES = ["Spam", "Promotions", "Newsletters"];
 const CLEAR_DURATION = 200;
 
-export default function useFolders() {
+export default function useFolders(categoryLabels = DEFAULT_CATEGORIES) {
   const [folders, setFolders] = useState(() =>
-    CATEGORIES.map((label) => ({
+    categoryLabels.map((label) => ({
       label,
       count: Math.floor(60 + Math.random() * 240),
       freeSpace: null,

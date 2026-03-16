@@ -9,10 +9,14 @@ export default function FolderAction({
   isCleared,
   onClear,
   buttonRef,
+  hintFreeSpace,
+  unwantedFiles,
+  spaceFreed,
+  clearLabel,
 }) {
   const resultText = isCleared
-    ? `${freeSpace ?? 0} MB of space freed`
-    : `${count} unwanted files found`;
+    ? `${freeSpace ?? 0} ${spaceFreed}`
+    : `${count} ${unwantedFiles}`;
 
   return (
     <div
@@ -23,7 +27,7 @@ export default function FolderAction({
       <div className="action__text">
         <div className="action__label">{label}</div>
         <div className="action__meta">
-          <div className="action__hint">0 mb free space</div>
+          <div className="action__hint">{hintFreeSpace}</div>
           <div className="action__result">
             <span
               className={`action__count${
@@ -37,7 +41,9 @@ export default function FolderAction({
                 <span className="action__spinner" />
               </div>
             ) : !isCleared ? (
-              <ClearButton onClick={onClear} ref={buttonRef} />
+              <ClearButton onClick={onClear} ref={buttonRef}>
+                {clearLabel}
+              </ClearButton>
             ) : null}
           </div>
         </div>

@@ -10,6 +10,10 @@ import CompletionModal from "./components/CompletionModal";
 import useFolders from "./hooks/useFolders";
 import useScanSequence from "./hooks/useScanSequence";
 import usePointerFlow, { POINTER_MULTI_INTERVAL } from "./hooks/usePointerFlow";
+import localizationMap from "./locales";
+
+const lang = language || "en";
+const s = localizationMap.get(lang) || localizationMap.get("en");
 
 export default function App() {
   const [showModal, setShowModal] = useState(false);
@@ -19,7 +23,7 @@ export default function App() {
   const scanButtonRef = useRef(null);
   const clearRefs = useRef([]);
 
-  const { folders, clearFolder, totalFreed, allCleared } = useFolders();
+  const { folders, clearFolder, totalFreed, allCleared } = useFolders(s.categories);
   const { isScanning, scanComplete, showIntroPointer } = useScanSequence();
   const {
     multiVisible,
@@ -57,13 +61,9 @@ export default function App() {
       <main className="playable__content" ref={containerRef}>
         <ScanAction
           icon={scanIcon}
-          label={scanComplete ? "Done!" : "Analyze"}
-          hint={
-            scanComplete
-              ? "Choose folders to clean up with ease!"
-              : "Scan mailbox to find clutter"
-          }
-          loadingText="Scanning…"
+          label={scanComplete ? s.scanDone : s.scanAnalyze}
+          hint={scanComplete ? s.scanHintComplete : s.scanHintInitial}
+          loadingText={s.scanning}
           buttonRef={scanButtonRef}
         />
 
@@ -79,6 +79,10 @@ export default function App() {
               isCleared={folder.isCleared}
               onClear={() => handleClearClick(index)}
               buttonRef={setClearRef(index)}
+              hintFreeSpace={s.hintFreeSpace}
+              unwantedFiles={s.unwantedFiles}
+              spaceFreed={s.spaceFreed}
+              clearLabel={s.clear}
             />
           ))}
         </div>
@@ -114,7 +118,12 @@ export default function App() {
             );
           })}
       </main>
-      <CompletionModal isOpen={showModal} totalFreed={totalFreed} />
+      <CompletionModal
+        isOpen={showModal}
+        totalFreed={totalFreed}
+        modalCopy={s.modalCopy}
+        downloadCta={s.downloadCta}
+      />
     </div>
   );
 }

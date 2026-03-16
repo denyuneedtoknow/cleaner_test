@@ -19,12 +19,19 @@ function useFireworksShadows(isOpen) {
   }, [isOpen]);
 }
 
-export default function CompletionModal({ isOpen, totalFreed }) {
+export default function CompletionModal({
+  isOpen,
+  totalFreed,
+  modalCopy,
+  downloadCta,
+}) {
   const fireworks = useFireworksShadows(isOpen);
 
   if (!isOpen) {
     return null;
   }
+
+  const copy = modalCopy.replace("{totalFreed}", totalFreed);
 
   return (
     <div className="modal-overlay" role="dialog" aria-live="polite">
@@ -42,11 +49,9 @@ export default function CompletionModal({ isOpen, totalFreed }) {
         <div className="pyro__burst pyro__burst--after" />
       </div>
       <div className="modal">
-        <p className="modal__copy">
-          100% of unwanted files cleared! {totalFreed} MB has been freed
-        </p>
+        <p className="modal__copy">{copy}</p>
         <button className="cta cta--shine" type="button" onClick={openStore}>
-          Download app for iOs
+          {downloadCta}
         </button>
       </div>
     </div>
